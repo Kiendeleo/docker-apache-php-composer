@@ -1,4 +1,4 @@
-FROM ubuntu:23.10
+FROM ubuntu:24.04
 
 MAINTAINER Kiendeleo <kiendeleo.com>
 
@@ -8,26 +8,26 @@ ENV DEBIAN_FRONTEND noninteractive
 # Install apache, php and supplimentary programs. also remove the list from the apt-get update at the end ;-)
 RUN apt-get update && \
 	apt-get install -y apache2 \
-	libapache2-mod-php8.2 \
-	php8.2 \
- 	php8.2-cli \
- 	php8.2-common \
- 	php8.2-mysql \
-  	php8.2-curl \
-	php8.2-gd \
-	php8.2-bcmath \
- 	php8.2-opcache \
-  	php8.2-readline \
-   	php8.2-xml \
-	php8.2-soap \
+	libapache2-mod-php8.3 \
+	php8.3 \
+ 	php8.3-cli \
+ 	php8.3-common \
+ 	php8.3-mysql \
+  	php8.3-curl \
+	php8.3-gd \
+	php8.3-bcmath \
+ 	php8.3-opcache \
+  	php8.3-readline \
+   	php8.3-xml \
+	php8.3-soap \
 	php-pear \
-	php8.2-apcu \
-	php8.2-fpm \
-	php8.2-curl \
+	php8.3-apcu \
+	php8.3-fpm \
+	php8.3-curl \
 	curl lynx-common lynx \
-	php8.2-mbstring \
-	php8.2-zip \
-	php8.2-uploadprogress \
+	php8.3-mbstring \
+	php8.3-zip \
+	php8.3-uploadprogress \
 	unzip \
 	git \
 	nano \
@@ -41,12 +41,12 @@ RUN cd /tmp && curl -sS https://getcomposer.org/installer | php && mv composer.p
 RUN mkdir /var/www/.composer/
 
 # Enable apache mods.
-RUN a2enmod php8.2
+RUN a2enmod php8.3
 RUN a2enmod rewrite
 
 # Update the PHP.ini file, enable <? ?> tags and quieten logging.
-RUN sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php/8.2/apache2/php.ini
-RUN sed -i "s/error_reporting = .*$/error_reporting = E_ERROR | E_WARNING | E_PARSE/" /etc/php/8.2/apache2/php.ini
+RUN sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php/8.3/apache2/php.ini
+RUN sed -i "s/error_reporting = .*$/error_reporting = E_ERROR | E_WARNING | E_PARSE/" /etc/php/8.3/apache2/php.ini
 
 # Manually set up the apache environment variables
 ENV APACHE_RUN_USER www-data
